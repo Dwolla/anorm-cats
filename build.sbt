@@ -1,5 +1,20 @@
 lazy val Scala212 = "2.12.11"
 lazy val Scala213 = "2.13.3"
+val PrimaryJava = "adopt@1.8"
+
+ThisBuild / crossScalaVersions := Seq(Scala212, Scala213)
+ThisBuild / scalaVersion := Scala213
+ThisBuild / githubWorkflowJavaVersions := Seq(PrimaryJava)
+ThisBuild / githubWorkflowPublishTargetBranches := Seq(RefPredicate.Equals(Ref.Branch("main")))
+ThisBuild / githubWorkflowPublish := Seq(
+  WorkflowStep.Sbt(
+    List("release"),
+    env = Map(
+      "BINTRAY_USER" -> "${{ secrets.BINTRAY_USER }}",
+      "BINTRAY_PASS" -> "${{ secrets.BINTRAY_TOKEN }}",
+    )
+  )
+)
 
 lazy val commonSettings = Seq(
   organization := "com.dwolla",
