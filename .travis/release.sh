@@ -18,7 +18,7 @@ fi
 git config user.name "$USERNAME"
 git config user.email "dev+dwolla-bot@dwolla.com"
 
-git remote add release "https://$GH_TOKEN@github.com/Dwolla/fs2-aws.git"
+git remote add release "https://$GH_TOKEN@github.com/Dwolla/anorm-cats.git"
 git fetch release
 
 git clean -dxf
